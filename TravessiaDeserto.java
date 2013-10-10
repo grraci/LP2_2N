@@ -52,9 +52,9 @@ LP2_2N
 
 		public String getEndMessage() {
 			if (isWinner())
-				return "Voce GANHOU!";
+				return "Voce ganhou!";
 			else
-				return "Voce PERDEU.";
+				return "Voce perdeu.";
 		}
 		public boolean isGameOver() {
 			if (isWinner())
@@ -73,22 +73,22 @@ LP2_2N
 		}
 
 		public void printStatus() {
-			System.out.println(String.format("Voce esta na posicao %d.", pos));
-			System.out.println(String.format("Voce possui %d unidades de combustivel.",fuel));
+			System.out.println(String.format("Posição %d.", pos));
+			System.out.println(String.format(" %d unidades de combustivel restantes",fuel));
 			if (pos > 0)
 				System.out.println(String.format("Existem %d unidades de combustivel nessa posicao.", map[pos]));
 		}
 		public int translateCommand(String command) {
 			String cmd = command.toLowerCase();
-			if (cmd.equals("avancar"))
+			if (cmd.equals("Avançar"))
 				return AVANCAR;
-			if (cmd.equals("voltar"))
+			if (cmd.equals("Voltar"))
 				return VOLTAR;
-			if (cmd.equals("carregar"))
+			if (cmd.equals("Carregar"))
 				return CARREGAR;
-			if (cmd.equals("descarregar"))
+			if (cmd.equals("Descarregar"))
 				return DESCARREGAR;
-			if (cmd.equals("ajuda"))
+			if (cmd.equals("Ajuda"))
 				return AJUDA;
 			return ERROR;
 		}
@@ -110,11 +110,11 @@ LP2_2N
 					ajuda();
 					break;
 				default:
-					System.err.println("Comando invalido.");
+					System.err.println("Comando inválido.");
 			}
 		}
 		public void ajuda() {
-			System.out.println("Comandos: avancar voltar carregar descarregar ajuda");
+			System.out.println("Comandos: Avancar, Voltar, Carregar, Descarregar e Ajuda. \n Digite um comando para iniciar/continuar.");
 		}
 		public void descarregar() {
 			if (fuel > 0) {
