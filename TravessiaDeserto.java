@@ -19,7 +19,6 @@ LP2_2N
 		public static final int VOLTAR = 1;
 		public static final int CARREGAR = 2;
 		public static final int DESCARREGAR = 3;
-		public static final int AJUDA = 4;
 		public static final int ERROR = -1;
 
 		private int[] map;
@@ -114,7 +113,8 @@ LP2_2N
 			}
 		}
 		public void ajuda() {
-			System.out.println("Comandos: Avancar, Voltar, Carregar, Descarregar e Ajuda. \n Digite um comando para iniciar/continuar.");
+			System.out.println("Comandos: Avancar, Voltar, Carregar, Descarregar e Ajuda");
+			
 		}
 		public void descarregar() {
 			if (fuel > 0) {
