@@ -167,7 +167,7 @@ import static org.junit.Assert.*;
 	
 	/*
 	 *The following method tests "ajuda()"
-	 *Checking if "print" is returning the setted message int he algorithm
+	 *Checking if "print" is returning the setted message in the algorithm
 	 */
 	@Test
 	public void testAjuda(){
