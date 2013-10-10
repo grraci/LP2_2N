@@ -137,7 +137,7 @@ import static org.junit.Assert.*;
 }
 		
 	/*
-	 *he following method tests "carregar()"
+	 *The following method tests "carregar()"
 	 */
 	@Test
 	public void testCarregar(){
@@ -158,7 +158,7 @@ import static org.junit.Assert.*;
 	assertEquals(td.getFuel(), fuelTest2+1);
 	assertEquals(td.getMapPos(), fuelInMap2-1);
 	
-	/*testando com map[pos] vazio*/
+	/*Testing with empty map[pos] */
 	int fuelTest3 = td.getFuel();
 	td.carregar();
 	assertEquals(td.getFuel(), fuelTest3);
