@@ -1,187 +1,218 @@
 LP2_2N
 ======
-import java.util.Scanner;
+/**Class with tests to the TravessiaDeserto.java" game
+ * In english cause I like to practice :P
 
-public class TravessiaDeserto {
+ * made by Graciela Robert
+
+ * @version X
+
+ */
 
 
-		private int posicao;
-		private int fuel;
-		private int[] mapa;
+import org.junit.*;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
-	    private Scanner sc = new Scanner(System.in);
+import static org.junit.Assert.*;
 
-	    public static final int MAX_FUEL = 6;
-		public static final int MAP_SIZE = 10;
-		public static final int ERRO = -1;
-		public static final int AJUDA = 0;
-		public static final int CARREGAR = 1;
-		public static final int DESCARREGAR = 2;
-		public static final int VOLTAR = 3;
-		public static final int AVANCAR = 4;
-
-		public static void main(String[] args)
-		{
-			(new TravessiaDeserto()).run(args);
-	    }
-
-		public void run(String[] args)
-		{
-			inicializaJogo();
-			do{
-				printStatus();
-				printPrompt();
-				int cmd = getCommand( sc.next() );
-				processCommand(cmd);
-	        } while (!isGameOver());
-
-			System.out.println(getEndMessage());
+	@RunWith(JUnit4.class)
+	public class TravessiaDesertoTest {
+	
+		@BeforeClass
+		public static void setUpBeforeClass(){
+			System.out.println("Test...");
 		}
-
-		public int getPosicao(){
-	        
-
-	        return posicao;
-		}
-		
-public int getFuel(){
-	        
-
-	        return fuel;
-		}
-public int getMapa(){
-    
-
-    return mapa[MAP_SIZE];
-}
-	   
-		public String getEndMessage()
-		{
-	        if (isWinner())
-	            return "Voce GANHOU!";
-			else
-	            return "Voce perdeu.";
-		}
-
-		public boolean isGameOver()
-		{
-	        if (isWinner())
-	            return true;
-			if (fuel == 0 && mapa[posicao] == 0)
-	            return true;
-			return false;
-		}
-
-		public boolean isWinner()
-		{
-			return posicao == mapa.length;
-		}
-
-		public void inicializaJogo()
-		{
-			fuel = MAX_FUEL;
-			posicao = 0;
-			mapa = new int[MAP_SIZE];
-		}
-
-		public void printStatus()
-		{
-	        System.out.println(String.format("Voce está na posição %d.", posicao));
-			System.out.println(String.format("Você tem %d unidades de combustível.",fuel));
-			if (posicao > 0)
-	            System.out.println(String.format("Nesta posicao existem %d unidades de combustivel.",fuel));
-		}
-
-	    public void printPrompt()
-	    {
-			System.out.print("Comando ('help' para ajuda): ");
-		}
-
-		public int getCommand(String command)
-		{
-	        String cmd = command.toLowerCase();
-
-			if (cmd.equals("avancar"))
-				return AVANCAR;
-			if (cmd.equals("voltar"))
-				return VOLTAR;
-			if (cmd.equals("carregar"))
-				return CARREGAR;
-			if (cmd.equals("descarregar"))
-				return DESCARREGAR;
-			if (cmd.equals("help"))
-				return AJUDA;
-
-	        return ERRO;
-		}
-
-		public void processCommand(int cmd) {
-			switch (cmd) {
-				case AJUDA:
-					ajuda();
-					break;
-				case VOLTAR:
-					voltar();
-					break;
-				case AVANCAR:
-					avancar();
-					break;
-				case CARREGAR:
-					carregar();
-					break;
-				case DESCARREGAR:
-					descarregar();
-					break;
-				default:
-					System.out.print("Comando Invalido");
-			}
-		}
-
-		public void ajuda()
-		{
-	        System.out.println("avancar voltar carregar descarregar ajuda");
-		}
-
-		public void avancar()
-		{
-			if (fuel > 0 ) {
-				fuel--;
-				posicao++;
-	        }
-		}
-
-		public void voltar()
-		{
-			if (fuel > 0 && posicao > 0) {
-	            fuel--;
-				posicao--;
-	        }
-
-			if (posicao == 0) {
-				fuel = MAX_FUEL;
-			}
-	    }
-
-	    public void carregar()
-	    {
-			if (fuel < MAX_FUEL && mapa[posicao] > 0 ) {
-				mapa[posicao]--;
-				fuel++;
-	        }
-		}
-
-		public void descarregar()
-		{
-			if (fuel> 0) {
-				mapa[posicao]++;
-				fuel--;
-	        }
-		
-			
-
-			
+	
+		@AfterClass
+	public static void tearDownAfterClass(){}
+			private TravessiaDeserto td;
+		@Before
+	public void setUp(){
+			td = new TravessiaDeserto();
+			td.initGame();
 			
 	}
+	@After
+	public void tearDown(){
+	}
+
 	
+	/*
+	 * The following method tests the inicialization of the game
+	 * */
+	@Test
+	public void testTravessia(){
+		
+
+		assertEquals("test position ",td.getPosicao(),0);
+		assertEquals("test fuel ",td.getFuel(),6);
+		assertEquals("test map ",td.MAP_SIZE,10);
+		
+		
+}
+	/*The following method tests when the commands are turned into int 
+	 * */
+	@Test
+	public void testTranslateCommand(){
+			
+		assertEquals(td.AVANCAR, td.translateCommand("Avancar"));
+		assertEquals(td.VOLTAR, td.translateCommand("Voltar"));
+		assertEquals(td.CARREGAR, td.translateCommand("Carregar"));
+		assertEquals(td.DESCARREGAR, td.translateCommand("Descarregar"));
+		assertEquals(td.AJUDA, td.translateCommand("Ajuda"));
+		
+}
+	
+	/*The following method tests the proccess "ProcessCommand"
+	 *It confers if the method returns the value as it should when requested by the "player"
+	 * */
+	@Test
+	public void tesProcessCommand_0(){
+	
+	int AVANCAR = td.AVANCAR;
+	int VOLTAR = td.VOLTAR;
+	int CARREGAR = td.CARREGAR;
+	int DESCARREGAR = td.DESCARREGAR;
+	int AJUDA = td.AJUDA;
+	
+	assertEquals(td.processCommand(td.AVANCAR), AVANCAR);
+	assertEquals(td.processCommand(td.VOLTAR), VOLTAR);
+	assertEquals(td.processCommand(td.CARREGAR), CARREGAR);
+	assertEquals(td.processCommand(td.DESCARREGAR), DESCARREGAR);
+	assertEquals(td.processCommand(td.AJUDA), AJUDA);
+	
+}
+	
+	/*
+	 *The following method tests "Descarregar()"
+	 */
+	@Test
+	public void testDescarregar(){
+		int fuelTest = td.getFuel();
+		int fuelInMap = td.getMapPos();
+		
+		
+		td.descarregar();
+		assertEquals(td.getFuel(), fuelTest-1);
+		assertEquals(td.getMapPos(), fuelInMap+1);
+		
+		
+}	
+	/*
+	 *The following method tests "Avancar()"
+	 */
+	@Test
+	public void testAvancar(){
+
+	int fuelTest = td.getFuel();
+	int positionTest = td.getPosicao();
+	
+	
+	td.avancar();
+		assertEquals(td.getFuel(), fuelTest-1);
+		assertEquals(td.getPosicao(), positionTest+1);
+		
+}
+	
+	/*
+	 *The following method tests "Voltar()"
+	 */
+	@Test
+	public void testVoltar(){
+
+	int fuelTest = td.getFuel();
+	int positionTest = td.getPosicao();
+	int posicaoInicial = 0;
+	
+	
+	td.voltar();
+	assertEquals(td.getPosicao(), posicaoInicial);
+	td.avancar();td.avancar();
+	
+	int fuelTest2 = td.getFuel();
+	td.voltar();
+	assertEquals(td.getFuel(), fuelTest2-1);
+
+}
+		
+	/*
+	 *he following method tests "carregar()"
+	 */
+	@Test
+	public void testCarregar(){
+
+	int fuelTest = td.getFuel();
+	int positionTest = td.getPosicao();
+	int fuelInMap = td.getMapPos();
+	
+	int posicaoInicial = 0;
+	
+
+	td.avancar();td.avancar();td.descarregar();
+
+	
+	int fuelTest2 = td.getFuel();
+	int fuelInMap2 = td.getMapPos();
+	td.carregar();
+	assertEquals(td.getFuel(), fuelTest2+1);
+	assertEquals(td.getMapPos(), fuelInMap2-1);
+	
+	/*testando com map[pos] vazio*/
+	int fuelTest3 = td.getFuel();
+	td.carregar();
+	assertEquals(td.getFuel(), fuelTest3);
+
+
+	
+	/*
+	 *The following method tests "ajuda()"
+	 *Checking if "print" is returning the setted message int he algorithm
+	 */
+	@Test
+	public void testAjuda(){
+	String ajuda = "Comandos: Avancar, Voltar, Carregar, Descarregar e Ajuda";
+	assertEquals(ajuda, td.ajuda());
+	
+	}
+	
+	/*
+	 * The following method tests isGameOver()
+	 * It's done a small test with a counter simulating a defeat
+	 * and verifying is the method "isGameOver" returns true or false.
+	 */
+	@Test
+	public void testIsGameOver(){
+		
+		for(int i = 0; i < 7; i++){
+			td.avancar();
+		}
+		if((td.getFuel() == 0) && (td.getMapPos() == 0)){
+			assertTrue(td.isGameOver());
+			
+		}else{
+			assertFalse(td.isGameOver());
+		}
+			
+	
+	}
+	
+	
+	/*
+	 * The following method tests "isWinner()"O metodo abaixo testa método isWinner()
+	 * The value of the position was setted to be tested
+	 * */
+	@Test
+	public void testIsWinner(){
+
+		//using set to test "isWinner"
+		td.setPosition(10);
+	
+		assertTrue(td.isWinner());
+		
+		
+	}		
+	
+
 	
 }
