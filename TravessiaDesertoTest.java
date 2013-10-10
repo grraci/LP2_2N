@@ -1,7 +1,7 @@
 LP2_2N
 ======
 /**Class with tests to the TravessiaDeserto.java" game
- * In english cause I like to practice :P
+ * In english because I like to practice :P
 
  * made by Graciela Robert
 
@@ -45,7 +45,7 @@ import static org.junit.Assert.*;
 	public void testTravessia(){
 		
 
-		assertEquals("test position ",td.getPosicao(),0);
+		assertEquals("test position ",td.getPosition(),0);
 		assertEquals("test fuel ",td.getFuel(),6);
 		assertEquals("test map ",td.MAP_SIZE,10);
 		
@@ -106,12 +106,12 @@ import static org.junit.Assert.*;
 	public void testAvancar(){
 
 	int fuelTest = td.getFuel();
-	int positionTest = td.getPosicao();
+	int positionTest = td.getPosition();
 	
 	
 	td.avancar();
 		assertEquals(td.getFuel(), fuelTest-1);
-		assertEquals(td.getPosicao(), positionTest+1);
+		assertEquals(td.getPosition(), positionTest+1);
 		
 }
 	
@@ -122,12 +122,12 @@ import static org.junit.Assert.*;
 	public void testVoltar(){
 
 	int fuelTest = td.getFuel();
-	int positionTest = td.getPosicao();
-	int posicaoInicial = 0;
+	int positionTest = td.getPosition();
+	int InitialPosition = 0;
 	
 	
 	td.voltar();
-	assertEquals(td.getPosicao(), posicaoInicial);
+	assertEquals(td.getPosition(), InitialPosition);
 	td.avancar();td.avancar();
 	
 	int fuelTest2 = td.getFuel();
@@ -143,10 +143,10 @@ import static org.junit.Assert.*;
 	public void testCarregar(){
 
 	int fuelTest = td.getFuel();
-	int positionTest = td.getPosicao();
+	int positionTest = td.getPosition();
 	int fuelInMap = td.getMapPos();
 	
-	int posicaoInicial = 0;
+	int InitialPosition = 0;
 	
 
 	td.avancar();td.avancar();td.descarregar();
